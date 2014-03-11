@@ -1,0 +1,29 @@
+<h3>New Invoice:</h3>
+<%= form_for @invoice do |f| %>
+  <p>
+    <%= f.label :btc_cost, "Price in BTC" %><br/>
+    <%= f.text_field :btc_cost, placeholder: "Price in BTC" %>
+  </p>
+
+  <p>
+    <%= f.label :destination_address_id, "Bitcoin Address" %><br/>
+    <%= f.collection_select :destination_address_id,
+                            current_user.destination_bitcoin_addresses, :id, :address %>
+  </p>
+
+  <%= f.submit "Create New Invoice", class: "btn btn-primary" %>
+<% end %>
+
+<hr/>
+
+<h3>Existing Invoices:</h3>
+<ul class="invoices">
+  <% @invoices.each do |invoice| %>
+    <li>
+      <h4><strong><%= link_to "Invoice ##{invoice.id}", invoice_path(invoice) %></strong></h4></p>
+      <p>Satoshi Cost: <%= invoice.satoshi_cost %></p>
+      <p>Satoshi Due: <%= invoice.satoshi_due %></p>
+      <p><strong>Status:</strong> <%= invoice.status %></p>
+    </li>
+  <% end %>
+</ul>

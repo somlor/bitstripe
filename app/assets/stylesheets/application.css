@@ -8,6 +8,29 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require bootstrap
  *= require_self
  *= require_tree .
  */
+
+.content {
+    margin: 10px 20px;
+}
+
+.navbar {
+  margin-bottom: 10px;
+}
+
+li.navbar-header a {
+  font-size: 1.25em;
+  color: #252525 !important;
+  font-weight: bold;
+}
+
+ul.invoices {
+  padding-left: 20px;
+}
+
+ul.invoices li {
+  list-style-type: none;
+}

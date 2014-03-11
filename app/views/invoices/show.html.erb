@@ -1,0 +1,31 @@
+<h3>Invoice #<%= @invoice.id %></h3>
+<ul>
+  <li><strong>Status:</strong> <%= @invoice.status %></li>
+  <li>Satoshi Cost: <%= @invoice.satoshi_cost %> (<%= @invoice.cost_in_btc %> BTC)</li>
+  <li>Satoshi Due: <%= @invoice.satoshi_due %></li>
+  <li>Destination Bitcoin Address: <%= @invoice.destination_address.address %></li>
+  <li>Forwarding Bitcoin Address: <%= @invoice.forwarding_address.try(:address) %></li>
+</ul>
+
+<h4>Payments:</h4>
+<ul>
+  <% @invoice.payments.each do |payment| %>
+    <li>
+      <p>Satoshi Paid: <%= payment.satoshi_paid %> (<%= payment.created_at %>)</p>
+    </li>
+  <% end %>
+</ul>
+
+<h4>Fake Payment:</h4>
+<form action ="<%= payments_path %>" method="post">
+  <input type="text" name="value" placeholder="Satoshi"><br/>
+  <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
+  <input type="hidden" name="auth_token" value="<%= @invoice.auth_token %>">
+  <input type="hidden" name="destination_address" value="<%= @invoice.destination_address.address %>">
+  <input type="hidden" name="destination_transaction_hash" value="<%= @invoice.destination_address.address %>">
+  <input type="hidden" name="input_address" value="<%= @invoice.destination_address.address %>">
+  <input type="hidden" name="input_transaction_hash" value="<%= @invoice.destination_address.address %>">
+  <input type="hidden" name="confirmations" value="<%= rand(1..9) %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <input type="submit" value="Submit Fake Payment" class="btn btn-primary" />
+</form>

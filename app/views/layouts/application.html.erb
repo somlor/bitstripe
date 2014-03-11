@@ -8,7 +8,37 @@
 </head>
 <body>
 
-<%= yield %>
+<nav class="navbar navbar-default" role="navigation">
+  <ul class="nav navbar-nav">
+    <li class="navbar-header">
+      <%= link_to "BitStripe", root_path %>
+    </li>
+    <% if logged_in? %>
+      <li>
+        <%= link_to "Profile", profile_index_path %>
+      </li>
+
+      <li>
+        <%= link_to "Invoices", invoices_path %>
+      </li>
+
+      <li>
+        <%= link_to "Logout", logout_path %>
+      </li>
+
+    <% else %>
+
+    <% end %>
+  </ul>
+</nav>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
