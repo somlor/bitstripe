@@ -2,7 +2,7 @@ require 'webmock'
 include WebMock::API
 WebMock.disable_net_connect!(allow_localhost: true)
 
-module BlockchainInfoServer
+module MockBlockchainInfoServer
     stub_request(:get, /blockchain.info\/api\/receive/).
       to_return(status: 200,
                 headers: {},
